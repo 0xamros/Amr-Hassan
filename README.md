@@ -22,7 +22,7 @@
         - Failure reason
         - Current date
         - List of users in the "webAdmins" group
-
+![image](./email_screenshot.png)
 
 
 
