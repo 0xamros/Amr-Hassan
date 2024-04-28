@@ -32,11 +32,7 @@
 defines the CI/CD pipeline for the Web Server Setup project. It automates the deployment of the Apache HTTP Server on the target VM (VM3) using the Ansible playbook, and sends email notifications in case of pipeline failures.
 
 
-```markdown
-# Jenkinsfile
 
-
-## Pipeline Structure
 
 ```groovy
 pipeline {
