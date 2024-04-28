@@ -1,4 +1,35 @@
-This Jenkinsfile defines the CI/CD pipeline for the Web Server Setup project. It automates the deployment of the Apache HTTP Server on the target VM (VM3) using the Ansible playbook, and sends email notifications in case of pipeline failures.
+## Components
+
+1. **VM1**: This virtual machine hosts the Jenkins server, which orchestrates the CI/CD pipeline.
+
+2. **VM2**: This virtual machine hosts the private GitLab instance for hosting Git repositories.
+
+3. **VM3**: This is the target machine where the Apache HTTP Server will be installed and configured using Ansible. It has the following components:
+    - **WebAdmins Group**: A group containing two users, "DevTeam" and "OpsTeam".
+    - **Apache HTTP Server**: The web server that will be installed and configured on this VM.
+
+4. **Git Repository**: The repository hosted on the GitLab instance (VM2) contains the `WebServerSetup.yml` Ansible playbook and the `GroupMembers.sh` Bash script.
+
+## Workflow
+
+1. **Code Changes**: When code changes are pushed to the Git repository, it triggers the CI/CD pipeline.
+
+2. **CI/CD Pipeline Triggered**: The Jenkins server (VM1) detects the code changes and initiates the CI/CD pipeline.
+
+3. **Pipeline Tasks**:
+    - **Install Apache**: The pipeline executes the `WebServerSetup.yml` Ansible playbook to install and configure the Apache HTTP Server on VM3.
+    - **Notify on Failure**: If the pipeline fails, an email notification is sent containing the following information:
+        - Failure reason
+        - Current date
+        - List of users in the "webAdmins" group
+
+
+
+
+
+# Jenkinsfile 
+
+defines the CI/CD pipeline for the Web Server Setup project. It automates the deployment of the Apache HTTP Server on the target VM (VM3) using the Ansible playbook, and sends email notifications in case of pipeline failures.
 
 
 ```markdown
@@ -66,7 +97,8 @@ This Jenkinsfile demonstrates how to automate the deployment of the Apache HTTP 
 
 
 
- Ansible playbook:
+ 
+ # Ansible playbook:
 
 ```markdown
 # Apache HTTP Server Installation and Configuration
