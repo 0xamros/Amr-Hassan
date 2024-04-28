@@ -63,3 +63,67 @@ pipeline {
            - The list of users in the "webAdmins" group (using the `listusers` environment variable).
 
 This Jenkinsfile demonstrates how to automate the deployment of the Apache HTTP Server using an Ansible playbook and send email notifications in case of pipeline failures. The environment variables capture relevant information, such as the current date and the list of users in the "webAdmins" group, which are included in the email notification.
+
+
+
+ Ansible playbook:
+
+```markdown
+# Apache HTTP Server Installation and Configuration
+
+This Ansible playbook is designed to install and configure the Apache HTTP Server on the target hosts.
+
+## Playbook Structure
+
+```yaml
+- name: Install and configure Apache HTTP Server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+```
+
+## Playbook Explanation
+
+1. **Play Definition**:
+   - `name: Install and configure Apache HTTP Server`: Descriptive name for the play.
+   - `hosts: all`: Specifies that the play should be executed on all hosts in the inventory.
+   - `become: true`: Enables privilege escalation to run tasks with administrative privileges.
+
+2. **Tasks**:
+   - **Install Apache**:
+     - `name: Install Apache`: Descriptive name for the task.
+     - `yum`: Module used for package management on RHEL-based systems.
+       - `name: httpd`: Specifies the name of the package to be installed (Apache HTTP Server).
+       - `state: present`: Ensures that the package is installed on the target hosts.
+
+   - **Start Apache service**:
+     - `name: Start Apache service`: Descriptive name for the task.
+     - `service`: Module used for managing services on Linux systems.
+       - `name: httpd`: Specifies the name of the service to be managed (Apache HTTP Server).
+       - `state: started`: Ensures that the Apache HTTP Server service is started.
+       - `enabled: yes`: Ensures that the Apache HTTP Server service is enabled to start automatically on system boot.
+
+## Usage
+
+1. Make sure you have Ansible installed on your control machine.
+2. Update the `hosts` inventory file with the IP addresses or hostnames of the target machines where you want to install and configure Apache HTTP Server.
+3. Run the playbook using the following command:
+
+```
+ansible-playbook apache-playbook.yml
+```
+
+This playbook will install the Apache HTTP Server package on the target hosts and start the service. It will also ensure that the Apache HTTP Server service is enabled to start automatically on system boot.
+
+
